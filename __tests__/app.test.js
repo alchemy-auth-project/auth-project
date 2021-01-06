@@ -2,7 +2,7 @@ const fs = require('fs');
 const pool = require('../lib/utils/pool');
 const request = require('supertest');
 const app = require('../lib/app');
-const User = require('../lib/services/User');
+const User = require('../lib/models/User');
 
 describe('demo routes', () => {
   beforeEach(() => {
@@ -29,7 +29,13 @@ describe('demo routes', () => {
 
 
   it('allows user to login', async() => {
-    const user = await User.insert({
+
+    // await User.insert({
+    //   email: 'test@test.com',
+    //   password: 'password'
+    // });
+
+    const user = await User.findByEmail({
       email: 'test@test.com',
       password: 'password'
     });
@@ -41,11 +47,7 @@ describe('demo routes', () => {
         password: 'password'
       });
 
-    expect(res.body).toEqual({
-      id: user.id,
-      email: 'test@test.com',
-      password: 'password'
-    });
+    expect(res.body).toEqual(user);
 
   });
 });
