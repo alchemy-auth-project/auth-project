@@ -30,10 +30,10 @@ describe('demo routes', () => {
 
   it('allows user to login', async() => {
 
-    // await User.insert({
-    //   email: 'test@test.com',
-    //   password: 'password'
-    // });
+    await User.insert({
+      email: 'test@test.com',
+      password: 'password'
+    });
 
     const user = await User.findByEmail({
       email: 'test@test.com',
@@ -41,7 +41,7 @@ describe('demo routes', () => {
     });
 
     const res = await request(app)
-      .post('api/v1/auth/login')
+      .post('/api/v1/auth/login')
       .send({
         email: 'test@test.com',
         password: 'password'
