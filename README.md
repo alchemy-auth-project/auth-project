@@ -32,8 +32,8 @@
 3. create User model and insert method x
 4. create UserService and create method (use bcrypt to hash password) x
 5. auth controller and signup handler x
-6. add authToken method to UserService
-7. attach cookie on signup
+6. add authToken method to UserService x
+7. attach cookie on signup x
 
 ### Login
 
