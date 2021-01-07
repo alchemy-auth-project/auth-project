@@ -20,7 +20,7 @@ describe('demo routes', () => {
       .send({ email: 'test@test.com', password: 'password', profilePhotoUrl: 'https://www.placecage.com/200/300' });
 
     expect(res.body).toEqual({
-      id: expect.any(String),
+      userId: expect.any(String),
       email: 'test@test.com',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
@@ -43,7 +43,7 @@ describe('demo routes', () => {
       });
 
     expect(res.body).toEqual({
-      id: user.id,
+      userId: user.userId,
       email: 'test@test.com',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
@@ -69,7 +69,7 @@ describe('demo routes', () => {
       .get('/api/v1/auth/verify');
 
     expect(res.body).toEqual({
-      id: user.id,
+      userId: user.userId,
       email: 'test@test.com',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
