@@ -19,5 +19,4 @@ jobs:
         CI: true
         DATABASE_URL: postgres://alchemy:alchemy@postgres:5432/alchemy
         SALT_ROUNDS: 4
-        NODE_ENV: production
         APP_SECRET: supersecr3t
