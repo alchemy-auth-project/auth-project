@@ -2,7 +2,8 @@ const fs = require('fs');
 const pool = require('../lib/utils/pool');
 const request = require('supertest');
 const app = require('../lib/app');
-const User = require('../lib/models/User');
+const UserService = require('../lib/services/UserService.js');
+
 
 describe('demo routes', () => {
   beforeEach(() => {
@@ -21,21 +22,14 @@ describe('demo routes', () => {
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      email: 'test@test.com',
-      password: 'password'
+      email: 'test@test.com'
     });
 
   });
 
 
   it('allows user to login', async() => {
-
-    await User.insert({
-      email: 'test@test.com',
-      password: 'password'
-    });
-
-    const user = await User.findByEmail({
+    const user = await UserService.create({
       email: 'test@test.com',
       password: 'password'
     });
@@ -47,7 +41,10 @@ describe('demo routes', () => {
         password: 'password'
       });
 
-    expect(res.body).toEqual(user);
+    expect(res.body).toEqual({
+      id: user.id,
+      email: 'test@test.com'
+    });
 
   });
 });
