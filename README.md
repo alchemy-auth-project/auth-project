@@ -130,12 +130,12 @@ Create RESTful post routes
 
 Create RESTful comments routes
 
-* `POST /comments`
+* `POST /comments` x
   * requires authentication
   * create a new comment
   * respond with the comment
   * HINT: get the user who created the comment from `req.user`.
-* `DELETE /comments/:id`
+* `DELETE /comments/:id` x
   * requires authentication
   * delete a comment by id
   * respond with the deleted comment
