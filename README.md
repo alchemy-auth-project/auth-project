@@ -62,26 +62,26 @@ Let's create an Instagram clone.
 
 Users can post new posts and leave comments. They have:
 
-* A String `username`
-* A String `password_hash`
-* A String `profile_photo_url`
+* A String `username` 
+* A String `password_hash` 
+* A String `profile_photo_url` 
 
 ### Post/Gram
 
 Posts are photos with some text caption. They should have:
 
-* A reference to user `user`
-* A String `photo_url`
-* A String `caption`
-* An array of String `tags`
+* A reference to user `user` 
+* A String `photo_url` 
+* A String `caption` 
+* An array of String `tags` 
 
 ### Comment
 
 Comments have:
 
-* A reference to a user `comment_by`
-* A reference to a post `post`
-* A string `comment`
+* A reference to a user `comment_by` 
+* A reference to a post `post` 
+* A string `comment` 
 
 ## Routes
 
@@ -89,42 +89,42 @@ Comments have:
 
 Create authentication routes
 
-* `POST /auth/signup`
-  * creates a new user
-  * responds with the created user
-* `POST /auth/login`
-  * responds with a user
-* `GET /auth/verify`
-  * uses the `ensureAuth` middleware
-  * responds with a user
+* `POST /auth/signup` x
+  * creates a new user x
+  * responds with the created user x
+* `POST /auth/login` x
+  * responds with a user x
+* `GET /auth/verify` x
+  * uses the `ensureAuth` middleware x
+  * responds with a user x
 
 ### Posts/Grams
 
 Create RESTful post routes
 
-* `POST /posts`
+* `POST /grams` x
   * requires authentication
-  * creates a new post
-  * responds with the new post
-  * HINT: get the user who created the post from `req.user`.
-* `GET /posts`
-  * responds with a list of posts
-* `GET /posts/:id`
-  * responds with a post by id
+  * creates a new gram
+  * responds with the new gram
+  * HINT: get the user who created the gram from `req.user`.
+* `GET /grams` x
+  * responds with a list of grams
+* `GET /grams/:id`
+  * responds with a gram by id
   * should include the joined user
-  * should include all comments associated with the post (joined with commenter)
-* `PATCH /posts/:id`
+  * should include all comments associated with the gram (joined with commenter)
+* `PATCH /grams/:id`
   * requires authentication
-  * only can update the post caption
-  * respond with the updated post
-  * NOTE: make sure the user attempting to update the post owns it
-* `DELETE /posts/:id`
+  * only can update the gram caption
+  * respond with the updated gram
+  * NOTE: make sure the user attempting to update the gram owns it
+* `DELETE /grams/:id`
   * requires authentication
-  * deletes a post
-  * responds with the deleted post
-  * NOTE: make sure the user attempting to delete the post owns it
-* `GET /posts/popular`
-  * respond with a list of the 10 posts with the most comments
+  * deletes a gram
+  * responds with the deleted gram
+  * NOTE: make sure the user attempting to delete the gram owns it
+* `GET /grams/popular`
+  * respond with a list of the 10 grams with the most comments
 
 ### Comments
 
@@ -145,13 +145,13 @@ Create RESTful comments routes
 
 * BONUS:
   * `GET /users/popular`
-    * respond with the 10 users with the most total comments on their posts
+    * respond with the 10 users with the most total comments on their grams
   * `GET /users/prolific`
-    * respond with the 10 users with the most posts
+    * respond with the 10 users with the most grams
   * `GET /users/leader`
     * respond with the 10 users with the most comments
   * `GET /users/impact`
-    * respond with the 10 users with the highest `$avg` comments per post
+    * respond with the 10 users with the highest `$avg` comments per gram
 
 ## Rubric
 
