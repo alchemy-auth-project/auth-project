@@ -32,8 +32,8 @@
 3. create User model and insert method x
 4. create UserService and create method (use bcrypt to hash password) x
 5. auth controller and signup handler x
-6. add authToken method to UserService
-7. attach cookie on signup
+6. add authToken method to UserService x
+7. attach cookie on signup x
 
 ### Login
 
@@ -41,11 +41,11 @@
 2. add findByEmail to User model x
 3. add authorize to UserService (use findByEmail and bcrypt.compare password) x
 4. add login handler to auth controller x
-5. attach cookie on login
+5. attach cookie on login x
 
 ### Verify
 
-1. verify route test
-2. add verify token in UserService
-3. add ensure auth middleware (get session cookie from req.cookies, verify token with UserService, attach user to req.user)
+1. verify route test x
+2. add verify token in UserService x
+3. add ensure auth middleware (get session cookie from req.cookies, verify token with UserService, attach user to req.user) x
 4. add verify handle and use ensureAuth middleware
