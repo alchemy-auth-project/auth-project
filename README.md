@@ -31,7 +31,7 @@
 2. create user table (setup.sql) x
 3. create User model and insert method x
 4. create UserService and create method (use bcrypt to hash password) x
-5. auth controller and signup handler
+5. auth controller and signup handler x
 6. add authToken method to UserService
 7. attach cookie on signup
 
@@ -39,8 +39,8 @@
 
 1. login route test x
 2. add findByEmail to User model x
-3. add authorize to UserService (use findByEmail and bcrypt.compare password)
-4. add login handler to auth controller
+3. add authorize to UserService (use findByEmail and bcrypt.compare password) x
+4. add login handler to auth controller x
 5. attach cookie on login
 
 ### Verify
