@@ -17,11 +17,12 @@ describe('demo routes', () => {
    
     const res = await request(app)
       .post('/api/v1/auth/signup') //setup post route
-      .send({ email: 'test@test.com', password: 'password' });
+      .send({ email: 'test@test.com', password: 'password', profilePhotoUrl: 'https://www.placecage.com/200/300' });
 
     expect(res.body).toEqual({
-      id: expect.any(String),
-      email: 'test@test.com'
+      userId: expect.any(String),
+      email: 'test@test.com',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
   });
@@ -30,7 +31,8 @@ describe('demo routes', () => {
   it('allows user to login', async() => {
     const user = await UserService.create({
       email: 'test@test.com',
-      password: 'password'
+      password: 'password',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
     const res = await request(app)
@@ -41,8 +43,9 @@ describe('demo routes', () => {
       });
 
     expect(res.body).toEqual({
-      id: user.id,
-      email: 'test@test.com'
+      userId: user.userId,
+      email: 'test@test.com',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
   });
@@ -51,7 +54,8 @@ describe('demo routes', () => {
     const agent = request.agent(app);
     const user = await UserService.create({
       email: 'test@test.com',
-      password: 'password'
+      password: 'password',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
     await agent
@@ -65,8 +69,9 @@ describe('demo routes', () => {
       .get('/api/v1/auth/verify');
 
     expect(res.body).toEqual({
-      id: user.id,
-      email: 'test@test.com'
+      userId: user.userId,
+      email: 'test@test.com',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
   });
 });
