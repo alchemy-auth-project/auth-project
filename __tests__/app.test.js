@@ -217,13 +217,13 @@ describe('demo routes', () => {
     const agent = request.agent(app);
     const agent2 = request.agent(app);
 
-    const user = await UserService.create({
+    await UserService.create({
       email: 'test@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password2',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -269,13 +269,13 @@ describe('demo routes', () => {
     const agent = request.agent(app);
     const agent2 = request.agent(app);
 
-    const user = await UserService.create({
+    await UserService.create({
       email: 'test@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password2',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -385,25 +385,25 @@ describe('demo routes', () => {
       .get(`/api/v1/grams/${gramPosted.body.gramId}`);
 
     expect(res.body).toEqual({
-      userId: user.userId,
-      photoUrl: 'https://www.fillmurray.com/200/300',
-      caption: 'Cool!',
-      tags: ['funny', 'snl'],
+      poster: user.email,
+      photoUrl: gramPosted.body.photoUrl,
+      caption: gramPosted.body.caption,
+      tags: gramPosted.body.tags,
       gramId: expect.any(String),
-      comments: [
+      commentData: [
         { 
           comment: commentOne.body.comment,
-          comment_id: user.userId,
+          comment_id: Number(commentOne.body.commentId),
           comment_email: user.email
         },
         {
           comment: commentTwo.body.comment,
-          comment_id: user.userId,
+          comment_id: Number(commentTwo.body.commentId),
           comment_email: user.email 
         },
         {
           comment: commentThree.body.comment,
-          comment_id: user.userId,
+          comment_id: Number(commentThree.body.commentId),
           comment_email: user2.email 
         }
       ]
