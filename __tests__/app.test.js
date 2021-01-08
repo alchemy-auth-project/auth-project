@@ -385,25 +385,25 @@ describe('demo routes', () => {
       .get(`/api/v1/grams/${gramPosted.body.gramId}`);
 
     expect(res.body).toEqual({
-      userId: user.userId,
-      photoUrl: 'https://www.fillmurray.com/200/300',
+      poster: user.email,
+      photourl: 'https://www.fillmurray.com/200/300',
       caption: 'Cool!',
       tags: ['funny', 'snl'],
-      gramId: expect.any(String),
-      comments: [
+      gramid: expect.any(String),
+      commentdata: [
         { 
           comment: commentOne.body.comment,
-          comment_id: user.userId,
+          comment_id: Number(commentOne.body.commentId),
           comment_email: user.email
         },
         {
           comment: commentTwo.body.comment,
-          comment_id: user.userId,
+          comment_id: Number(commentTwo.body.commentId),
           comment_email: user.email 
         },
         {
           comment: commentThree.body.comment,
-          comment_id: user.userId,
+          comment_id: Number(commentThree.body.commentId),
           comment_email: user2.email 
         }
       ]
