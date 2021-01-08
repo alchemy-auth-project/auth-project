@@ -616,7 +616,7 @@ describe('demo routes', () => {
         gramId: gramPosted.body.gramId
       });
 
-    const res = await agent2
+    const res = await agent
       .delete(`/api/v1/grams/${gramPosted.body.gramId}`)
       
     expect(res.body).toEqual({
@@ -626,6 +626,74 @@ describe('demo routes', () => {
       tags: gramPosted.body.tags,
       gramId: gramPosted.body.gramId
     });
+  });
+
+  it('/DELETE with wrong user, verify error message', async() => {
+    const agent = request.agent(app);
+    const agent2 = request.agent(app);
+    
+    const user = await UserService.create({
+      email: 'test@test.com',
+      password: 'password',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
+    });
+
+    const user2 = await UserService.create({
+      email: 'test2@test.com',
+      password: 'password',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
+    });
+
+    await agent
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'test@test.com',
+        password: 'password'
+      });
+
+    await agent2
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'test2@test.com',
+        password: 'password'
+      });
+
+    const gramPosted = await agent
+      .post('/api/v1/grams')
+      .send({
+        photoUrl: 'https://www.fillmurray.com/200/300',
+        caption: 'Cool!',
+        tags: ['funny', 'snl']
+      });
+
+    const commentOne = await agent
+      .post('/api/v1/comments')
+      .send({
+        comment: 'Wow looks fun!',
+        gramId: gramPosted.body.gramId
+      });
+
+    const commentTwo = await agent
+      .post('/api/v1/comments')
+      .send({
+        comment: 'What a blast!',
+        gramId: gramPosted.body.gramId
+      });
+
+    const commentThree = await agent2
+      .post('/api/v1/comments')
+      .send({
+        comment: 'nice!!!!',
+        gramId: gramPosted.body.gramId
+      });
+
+    const res = await agent2
+      .delete(`/api/v1/grams/${gramPosted.body.gramId}`)
+      
+    expect(res.body).toEqual({
+      message: 'No gram with id 1 is valid for user 2 to delete',
+      status: 500
+    })
   });
 
 });
