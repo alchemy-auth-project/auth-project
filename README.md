@@ -118,13 +118,13 @@ Create RESTful post routes
   * only can update the gram caption
   * respond with the updated gram
   * NOTE: make sure the user attempting to update the gram owns it
-* `DELETE /grams/:id` 
+* `DELETE /grams/:id` x
   * requires authentication
   * deletes a gram
   * responds with the deleted gram
   * NOTE: make sure the user attempting to delete the gram owns it
   * Added: also delete the comments
-* `GET /grams/popular`
+* `GET /grams/popular` x
   * respond with a list of the 10 grams with the most comments
 
 ### Comments
