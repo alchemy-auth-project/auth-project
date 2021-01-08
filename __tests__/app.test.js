@@ -390,7 +390,23 @@ describe('demo routes', () => {
       caption: 'Cool!',
       tags: ['funny', 'snl'],
       gramId: expect.any(String),
-      comments: [[commentOne.body.comment, user.userId], [commentTwo.body.comment, user.userId], [commentThree.body.comment, user.userId]]
+      comments: [
+        { 
+          comment: commentOne.body.comment,
+          comment_id: user.userId,
+          comment_email: user.email
+        },
+        {
+          comment: commentTwo.body.comment,
+          comment_id: user.userId,
+          comment_email: user.email 
+        },
+        {
+          comment: commentThree.body.comment,
+          comment_id: user.userId,
+          comment_email: user2.email 
+        }
+      ]
     });
   });
 });
