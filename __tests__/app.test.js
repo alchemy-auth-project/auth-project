@@ -320,39 +320,77 @@ describe('demo routes', () => {
 
   });
 
-  // it('/GET a list of grams', async() => {
-  //   const agent = request.agent(app);
+
+  it('/GET one gram via id', async() => {
+    const agent = request.agent(app);
+    const agent2 = request.agent(app);
     
-  //   const user = await UserService.create({
-  //     email: 'test@test.com',
-  //     password: 'password',
-  //     profilePhotoUrl: 'https://www.placecage.com/200/300'
-  //   });
+    const user = await UserService.create({
+      email: 'test@test.com',
+      password: 'password',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
+    });
 
-  //   await agent
-  //     .post('/api/v1/auth/login')
-  //     .send({
-  //       email: 'test@test.com',
-  //       password: 'password'
-  //     });
+    const user2 = await UserService.create({
+      email: 'test2@test.com',
+      password: 'password',
+      profilePhotoUrl: 'https://www.placecage.com/200/300'
+    });
 
-  //   await agent
-  //     .post('/api/v1/grams')
-  //     .send({
-  //       photoUrl: 'https://www.fillmurray.com/200/300',
-  //       caption: 'Cool!',
-  //       tags: ['funny', 'snl']
-  //     });
 
-  //   const res = await request(app)
-  //     .get('/api/v1/grams/:id');
+    await agent
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'test@test.com',
+        password: 'password'
+      });
 
-  //   expect(res.body).toEqual({
-  //     userId: user.userId,
-  //     photoUrl: 'https://www.fillmurray.com/200/300',
-  //     caption: 'Cool!',
-  //     tags: ['funny', 'snl'],
-  //     gramId: expect.any(String)
-  //   });
-  // });
+    await agent2
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'test2@test.com',
+        password: 'password'
+      });
+
+    const gramPosted = await agent
+      .post('/api/v1/grams')
+      .send({
+        photoUrl: 'https://www.fillmurray.com/200/300',
+        caption: 'Cool!',
+        tags: ['funny', 'snl']
+      });
+
+    const commentOne = await agent
+      .post('/api/v1/comments')
+      .send({
+        comment: 'Wow looks fun!',
+        gramId: gramPosted.body.gramId
+      });
+
+    const commentTwo = await agent
+      .post('/api/v1/comments')
+      .send({
+        comment: 'What a blast!',
+        gramId: gramPosted.body.gramId
+      });
+
+    const commentThree = await agent2
+      .post('/api/v1/comments')
+      .send({
+        comment: 'nice!!!!',
+        gramId: gramPosted.body.gramId
+      });
+
+    const res = await request(app)
+      .get(`/api/v1/grams/${gramPosted.body.gramId}`);
+
+    expect(res.body).toEqual({
+      userId: user.userId,
+      photoUrl: 'https://www.fillmurray.com/200/300',
+      caption: 'Cool!',
+      tags: ['funny', 'snl'],
+      gramId: expect.any(String),
+      comments: [[commentOne.body.comment, user.userId], [commentTwo.body.comment, user.userId], [commentThree.body.comment, user.userId]]
+    });
+  });
 });
