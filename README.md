@@ -48,7 +48,7 @@
 1. verify route test x
 2. add verify token in UserService x
 3. add ensure auth middleware (get session cookie from req.cookies, verify token with UserService, attach user to req.user) x
-4. add verify handle and use ensureAuth middleware
+4. add verify handle and use ensureAuth middleware x
 
 
 
@@ -109,20 +109,21 @@ Create RESTful post routes
   * HINT: get the user who created the gram from `req.user`.
 * `GET /grams` x
   * responds with a list of grams
-* `GET /grams/:id`
+* `GET /grams/:id` x
   * responds with a gram by id
   * should include the joined user
   * should include all comments associated with the gram (joined with commenter)
-* `PATCH /grams/:id`
+* `PATCH /grams/:id` x
   * requires authentication
   * only can update the gram caption
   * respond with the updated gram
   * NOTE: make sure the user attempting to update the gram owns it
-* `DELETE /grams/:id`
+* `DELETE /grams/:id` 
   * requires authentication
   * deletes a gram
   * responds with the deleted gram
   * NOTE: make sure the user attempting to delete the gram owns it
+  * Added: also delete the comments
 * `GET /grams/popular`
   * respond with a list of the 10 grams with the most comments
 
