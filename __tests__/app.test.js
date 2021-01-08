@@ -386,11 +386,11 @@ describe('demo routes', () => {
 
     expect(res.body).toEqual({
       poster: user.email,
-      photourl: 'https://www.fillmurray.com/200/300',
+      photoUrl: 'https://www.fillmurray.com/200/300',
       caption: 'Cool!',
       tags: ['funny', 'snl'],
-      gramid: expect.any(String),
-      commentdata: [
+      gramId: expect.any(String),
+      commentData: [
         { 
           comment: commentOne.body.comment,
           comment_id: Number(commentOne.body.commentId),
