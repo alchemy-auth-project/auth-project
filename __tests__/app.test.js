@@ -217,13 +217,13 @@ describe('demo routes', () => {
     const agent = request.agent(app);
     const agent2 = request.agent(app);
 
-    const user = await UserService.create({
+    await UserService.create({
       email: 'test@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password2',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -269,13 +269,13 @@ describe('demo routes', () => {
     const agent = request.agent(app);
     const agent2 = request.agent(app);
 
-    const user = await UserService.create({
+    await UserService.create({
       email: 'test@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password2',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -386,9 +386,9 @@ describe('demo routes', () => {
 
     expect(res.body).toEqual({
       poster: user.email,
-      photoUrl: 'https://www.fillmurray.com/200/300',
-      caption: 'Cool!',
-      tags: ['funny', 'snl'],
+      photoUrl: gramPosted.body.photoUrl,
+      caption: gramPosted.body.caption,
+      tags: gramPosted.body.tags,
       gramId: expect.any(String),
       commentData: [
         { 
