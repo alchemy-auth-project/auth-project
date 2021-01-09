@@ -706,4 +706,14 @@ describe('demo routes', () => {
 
   });
 
+  it('/GET the 10 users with most grams', async() => {
+
+    await pool.query(fs.readFileSync('./sql/userTest.sql', 'utf-8'));
+    const res = await request(app)
+      .get('/api/v1/users/prolific');
+
+    expect(res.body).toEqual(require('./prolificResults.json'));
+
+  });
+
 });
