@@ -420,7 +420,7 @@ describe('demo routes', () => {
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -449,21 +449,21 @@ describe('demo routes', () => {
         tags: ['funny', 'snl']
       });
 
-    const commentOne = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'Wow looks fun!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentTwo = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'What a blast!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentThree = await agent2
+    await agent2
       .post('/api/v1/comments')
       .send({
         comment: 'nice!!!!',
@@ -474,7 +474,7 @@ describe('demo routes', () => {
       .patch(`/api/v1/grams/${gramPosted.body.gramId}`)
       .send({
         caption: 'Not fire'
-      })
+      });
 
     expect(res.body).toEqual({
       userId: user.userId,
@@ -489,13 +489,13 @@ describe('demo routes', () => {
     const agent = request.agent(app);
     const agent2 = request.agent(app);
     
-    const user = await UserService.create({
+    await UserService.create({
       email: 'test@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -524,21 +524,21 @@ describe('demo routes', () => {
         tags: ['funny', 'snl']
       });
 
-    const commentOne = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'Wow looks fun!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentTwo = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'What a blast!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentThree = await agent2
+    await agent2
       .post('/api/v1/comments')
       .send({
         comment: 'nice!!!!',
@@ -549,7 +549,7 @@ describe('demo routes', () => {
       .patch(`/api/v1/grams/${gramPosted.body.gramId}`)
       .send({
         caption: 'Not fire'
-      })
+      });
 
     expect(res.body).toEqual({
       message: 'No gram with id 1 is valid for user 2 to update',
@@ -567,7 +567,7 @@ describe('demo routes', () => {
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -595,21 +595,21 @@ describe('demo routes', () => {
         tags: ['funny', 'snl']
       });
 
-    const commentOne = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'Wow looks fun!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentTwo = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'What a blast!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentThree = await agent2
+    await agent2
       .post('/api/v1/comments')
       .send({
         comment: 'nice!!!!',
@@ -617,7 +617,7 @@ describe('demo routes', () => {
       });
 
     const res = await agent
-      .delete(`/api/v1/grams/${gramPosted.body.gramId}`)
+      .delete(`/api/v1/grams/${gramPosted.body.gramId}`);
       
     expect(res.body).toEqual({
       userId: user.userId,
@@ -632,13 +632,13 @@ describe('demo routes', () => {
     const agent = request.agent(app);
     const agent2 = request.agent(app);
     
-    const user = await UserService.create({
+    await UserService.create({
       email: 'test@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
     });
 
-    const user2 = await UserService.create({
+    await UserService.create({
       email: 'test2@test.com',
       password: 'password',
       profilePhotoUrl: 'https://www.placecage.com/200/300'
@@ -666,21 +666,21 @@ describe('demo routes', () => {
         tags: ['funny', 'snl']
       });
 
-    const commentOne = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'Wow looks fun!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentTwo = await agent
+    await agent
       .post('/api/v1/comments')
       .send({
         comment: 'What a blast!',
         gramId: gramPosted.body.gramId
       });
 
-    const commentThree = await agent2
+    await agent2
       .post('/api/v1/comments')
       .send({
         comment: 'nice!!!!',
@@ -688,7 +688,7 @@ describe('demo routes', () => {
       });
 
     const res = await agent2
-      .delete(`/api/v1/grams/${gramPosted.body.gramId}`)
+      .delete(`/api/v1/grams/${gramPosted.body.gramId}`);
       
     expect(res.body).toEqual({
       message: 'No gram with id 1 is valid for user 2 to delete',
@@ -698,17 +698,16 @@ describe('demo routes', () => {
 
   it('/GET the 10 grams with most comments', async() => {
 
-    await pool.query(fs.readFileSync('./sql/test.sql', 'utf-8'));
+    await pool.query(fs.readFileSync('./sql/seedData.sql', 'utf-8'));
     const res = await request(app)
       .get('/api/v1/grams/popular');
 
-    expect(res.body).toEqual(require('./expectedResults.json'));
-
+    expect(res.body).toEqual(require('./popularResults.json'));
   });
 
   it('/GET the 10 users with most grams', async() => {
 
-    await pool.query(fs.readFileSync('./sql/userTest.sql', 'utf-8'));
+    await pool.query(fs.readFileSync('./sql/seedData.sql', 'utf-8'));
     const res = await request(app)
       .get('/api/v1/users/prolific');
 
