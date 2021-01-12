@@ -8,7 +8,7 @@ let user;
 
 describe('auth routes', () => {
   beforeEach(async() => {
-    pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
+    await pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
 
     return user = await UserService.create({
       email: 'test@test.com',

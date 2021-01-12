@@ -10,7 +10,7 @@ const agent2 = request.agent(app);
 
 describe('demo routes', () => {
   beforeEach(async() => {
-    pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
+    await pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
 
     await UserService.create({
       email: 'test@test.com',

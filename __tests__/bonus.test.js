@@ -4,8 +4,8 @@ const request = require('supertest');
 const app = require('../lib/app');
 
 describe('gram routes', () => {
-  beforeEach(() => {
-    pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
+  beforeEach(async() => {
+    await pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
     return pool.query(fs.readFileSync('./sql/seedData.sql', 'utf-8'));
   });
 
