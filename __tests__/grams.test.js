@@ -6,7 +6,6 @@ const UserService = require('../lib/services/UserService.js');
 
 let user1;
 let user2;
-
 const agent = request.agent(app);
 const agent2 = request.agent(app);
 
@@ -110,8 +109,7 @@ describe('gram routes', () => {
       caption: 'So fluff',
       tags: ['cat', 'smol'],
       gramId: expect.any(String)
-    }
-    ];
+    }];
 
     results.forEach(result => expect(res.body).toContainEqual(result));
   });
@@ -305,7 +303,6 @@ describe('gram routes', () => {
   });
 
   it('/DELETE gram by id and associated comments with wrong user', async() => {
-
     const gramPosted = await agent
       .post('/api/v1/grams')
       .send({
